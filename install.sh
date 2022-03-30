@@ -1,33 +1,39 @@
 #!/bin/bash
 
+sudo apt update -y && sudo apt upgrade -y
+
 if [ -d "$ZSH" ]; then
 	echo "zsh already installed"
 else
 	echo "installing zsh..."
 	sudo apt install -y zsh
 	sudo chsh -s $(which zsh)
-	sed -i "s/\"robbyrussell\"/\"norm\"/" ~/.zshrc
 fi
 
 if [ -d ~/.oh-my-zsh ]; then
 	echo "oh-my-zsh already installed"
 else
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-	sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions)/" ~/.zshrc
 fi
 
-if [ -f ~/z.sh ];then
-	echo "z.sh already installed"
+if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+	echo "autosuggestions already installed"
 else
-	echo "installing z.sh"
-	wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/z.sh
-	echo . ~/z.sh >> ~/.zshrc
+	echo "installing autosuggestions"
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
-if [ -f $(which tmux) ];then
+if [ -f $(which autojump) ]; then
+	echo "Autojump already installed"
+else
+	echo "Installing autojump"
+	sudo apt install autojump
+fi
+
+if [[ -f $(which tmux) || "$TERM" == "screen" ]]; then
 	echo "Tmux already installed"
 else
+	echo "Installing tmux"
 	sudo apt install tmux
 fi
 
