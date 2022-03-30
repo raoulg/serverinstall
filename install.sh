@@ -5,6 +5,15 @@ sudo apt -y update ; sudo apt -y install make build-essential libssl-dev zlib1g-
 libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
 libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 
+
+if [ -d "$ZSH" ]; then
+	echo "zsh already installed"
+else
+	echo "installing zsh..."
+	sudo apt install -y zsh
+fi
+	
+
 if [ -d ~/.pyenv ]; then
 	echo "Pyenv already installed"
 else
@@ -20,12 +29,18 @@ else
 	echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 fi
 
-if [ -d "$ZSH" ]; then
-	echo "zsh already installed"
+if [[ $(pyenv versions) == *"3.9.12"* ]]; then
+	echo "Python version 3.9.12 already installed"
 else
-	echo "installing zsh..."
-	sudo apt install -y zsh
-	sudo chsh -s $(which zsh)
+	pyenv install 3.9.12
+fi
+pyenv global 3.9.12
+
+if [ -f $(which poetry) ]; then 
+	echo "Poetry already installed"
+else
+	curl -sSL https://install.python-poetry.org | python -
+	echo 'export PATH="$HOME/.local/bin${PATH:+:${PATH}}"' >> ~/.zshrc
 fi
 
 if [ -d ~/.oh-my-zsh ]; then
@@ -54,15 +69,6 @@ else
 	echo "Installing tmux"
 	sudo apt install tmux
 fi
-
-if [[ $(pyenv versions) == *"3.9.12"* ]]; then
-	echo "Python version 3.9.12 already installed"
-else
-	pyenv install 3.9.12
-fi
-pyenv global 3.9.12
-curl -sSL https://install.python-poetry.org | python -
-echo 'export PATH="$HOME/.local/bin${PATH:+:${PATH}}"' >> ~/.zshrc
 
 exec zsh
 source ~/.zshrc
