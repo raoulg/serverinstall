@@ -10,3 +10,11 @@ It will:
 - install [autojump](https://github.com/wting/autojump)
 - install [tmux](https://github.com/tmux/tmux/wiki)
 
+General instructions
+
+    cd ~
+    git clone https://github.com/raoulg/serverinstall.git
+    . ~/serverinstall/install.sh 
+    . ~/serverinstall/settings.sh
+
+If the scripts run succesfully, you will see INSTALL FINISHED SUCCESFULLY or SUCCESFULLY MODIFIED SETTINGS at the end. If not, run again.
