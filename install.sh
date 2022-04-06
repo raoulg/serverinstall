@@ -27,6 +27,19 @@ else
 	echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 fi
 
+if [ -d ~/.oh-my-zsh ]; then
+	echo "oh-my-zsh already installed"
+else
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+	echo "autosuggestions already installed"
+else
+	echo "installing autosuggestions"
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+
 if [[ $(pyenv versions) == *"3.9.12"* ]]; then
 	echo "Python version 3.9.12 already installed"
 else

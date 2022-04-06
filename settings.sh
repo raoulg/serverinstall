@@ -1,17 +1,5 @@
 #!/bin/bash
 
-if [ -d ~/.oh-my-zsh ]; then
-	echo "oh-my-zsh already installed"
-else
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
-
-if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-	echo "autosuggestions already installed"
-else
-	echo "installing autosuggestions"
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
 
 if [ -d $ZSH_CUSTOM/plugins/poetry ]; then
 	echo "poetry completions already added to zsh"

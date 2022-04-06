@@ -18,3 +18,13 @@ General instructions
     . ~/serverinstall/settings.sh
 
 If the scripts run succesfully, you will see INSTALL FINISHED SUCCESFULLY or SUCCESFULLY MODIFIED SETTINGS at the end. If not, run again.
+
+Right now, you will need to run the install.sh script twice:
+the first time, it stops after oh-my-zsh is installed.
+The second time, it adds the rest.
+
+Removing oh-my-zsh causes problems because the script does not has acces to the
+`pyenv` commando yet; the installation of oh-my-zsh triggers has that as a side effect
+because of the shell reboot.
+
+If someone has a nice fix for that, let me know :)
