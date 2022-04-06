@@ -57,21 +57,6 @@ else
 	sudo apt install tmux
 fi
 
-if [ -d ~/.oh-my-zsh ]; then
-	echo "oh-my-zsh already installed"
-else
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
-
-if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-	echo "autosuggestions already installed"
-else
-	echo "installing autosuggestions"
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
-
-exec zsh
-source ~/.zshrc
 sudo chsh -s $(which zsh)
-
 echo "INSTALL FINISHED SUCCESFULLY"
+source ~/.zshrc
