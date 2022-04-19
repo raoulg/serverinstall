@@ -18,6 +18,8 @@ if [ -d "$ZSH" ]; then
 else
 	echo "installing zsh..."
 	sudo apt install -y zsh
+	echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
+	echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 	echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zprofile
 	echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zprofile
 	echo 'eval "$(pyenv init --path)"' >> ~/.zprofile
