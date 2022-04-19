@@ -33,7 +33,7 @@ fi
 if [ -d ~/.oh-my-zsh ]; then
 	echo "oh-my-zsh already installed"
 else
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
 fi
 
 if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
