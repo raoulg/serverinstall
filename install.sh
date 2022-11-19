@@ -57,19 +57,7 @@ else
 	echo 'export PATH="$HOME/.local/bin${PATH:+:${PATH}}"' >> ~/.zshrc
 fi
 
-if [ -f $(which autojump) ]; then
-	echo "Autojump already installed"
-else
-	echo "Installing autojump"
-	sudo apt install autojump
-fi
 
-if [[ -f $(which tmux) || "$TERM" == "screen" ]]; then
-	echo "Tmux already installed"
-else
-	echo "Installing tmux"
-	sudo apt install tmux
-fi
 
 COUNTER=0
 if [ -d ~/.pyenv ]; then
@@ -90,13 +78,7 @@ fi
 if [ -f $(which poetry) ]; then 
 	let COUNTER++
 fi
-if [ -f $(which autojump) ]; then
-	let COUNTER++
-fi
-if [[ -f $(which tmux) || "$TERM" == "screen" ]]; then
-	let COUNTER++
-fi
-echo "Installed ${COUNTER}/8 items succesfully"
+echo "Installed ${COUNTER}/6 items succesfully"
 
 sudo chsh -s $(which zsh)
 source ~/.zshrc
