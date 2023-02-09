@@ -43,12 +43,12 @@ else
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
-if [[ $(pyenv versions) == *"3.9.12"* ]]; then
-	echo "Python version 3.9.12 already installed"
+if [[ $(pyenv versions) == *"3.10.9"* ]]; then
+	echo "Python version 3.10.9 already installed"
 else
-	pyenv install 3.9.12
+	pyenv install 3.10.9
 fi
-pyenv global 3.9.12
+pyenv global 3.10.9
 
 if [ -f $(which poetry) ]; then 
 	echo "Poetry already installed"
@@ -56,6 +56,39 @@ else
 	curl -sSL https://install.python-poetry.org | python -
 	echo 'export PATH="$HOME/.local/bin${PATH:+:${PATH}}"' >> ~/.zshrc
 fi
+
+if [ -f $(which zoxide) ]; then 
+	echo "zoxide installed"
+else
+	curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+	echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+	echo "zoxide installed"
+fi
+
+if [ -f $(which starship) ]; then 
+	echo "starship installed"
+else
+	curl -ss https://starship.rs/install.sh | sh
+	echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+	echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+
+	echo "starship installed"
+fi
+
+if [ -f $(which fontconfig) ]; then 
+	echo "fontconfig installed"
+else
+	sudo apt install unzip
+	sudo apt install fontconfig
+	mkdir ~/.fonts
+	cd ~/.fonts
+	wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraCode.zip
+	unzip FiraCode.zip
+	fc-cache -f -v
+	echo "fontconfig installed"
+fi
+
+
 
 
 
