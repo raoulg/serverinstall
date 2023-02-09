@@ -10,7 +10,7 @@ else
 fi
 
 echo "adding plugins"
-omz plugin enable zsh-autosuggestions tmux autojump poetry
+omz plugin enable zsh-autosuggestions poetry
 echo "setting theme"
 omz theme set norm
 omz reload
