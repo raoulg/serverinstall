@@ -90,6 +90,16 @@ else
 	echo "starship installed"
 fi
 
+if [ -f $(which nvim) ]; then 
+	echo "neovim installed"
+else
+	sudo apt install snapd
+	sudo snap install nvim --classic
+
+	echo "neovim installed"
+fi
+
+
 
 
 
