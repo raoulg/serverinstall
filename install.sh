@@ -65,15 +65,6 @@ else
 	echo "zoxide installed"
 fi
 
-if [ -f $(which starship) ]; then 
-	echo "starship installed"
-else
-	curl -ss https://starship.rs/install.sh | sh
-	echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-	echo 'eval "$(starship init zsh)"' >> ~/.zshrc
-
-	echo "starship installed"
-fi
 
 if [ -f $(which fontconfig) ]; then 
 	echo "fontconfig installed"
@@ -88,6 +79,16 @@ else
 	echo "fontconfig installed"
 fi
 
+if [ -f $(which starship) ]; then 
+	echo "starship installed"
+else
+	curl -ss https://starship.rs/install.sh | sh
+	echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+	echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+	starship preset nerd-font-symbols > ~/.config/starship.toml
+
+	echo "starship installed"
+fi
 
 
 
