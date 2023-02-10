@@ -65,6 +65,12 @@ else
 	echo "zoxide installed"
 fi
 
+if [ -f $(which exa	) ]; then 
+	echo "exa already installed"
+else
+	sudo apt install exa
+	echo "alias lsd='exa -h --icons --long --sort=mod'" >> ~/.zshrc
+fi
 
 if [ -f $(which fontconfig) ]; then 
 	echo "fontconfig installed"
