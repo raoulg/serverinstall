@@ -33,7 +33,7 @@ fi
 if [ -d ~/.oh-my-zsh ]; then
 	echo "oh-my-zsh already installed"
 else
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
@@ -43,21 +43,22 @@ else
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 fi
 
-if [[ $(pyenv versions) == *"3.10.9"* ]]; then
-	echo "Python version 3.10.9 already installed"
+if [[ $(pyenv versions) == *"3.10.13"* ]]; then
+	echo "Python version 3.10.13 already installed"
 else
-	pyenv install 3.10.9
+	pyenv install 3.10.13
 fi
-pyenv global 3.10.9
 
-if [ -f $(which poetry) ]; then 
-	echo "Poetry already installed"
+pyenv global 3.10.13
+
+if [ -f $(which pdm) ]; then
+	echo "pdm already installed"
 else
-	curl -sSL https://install.python-poetry.org | python -
+	curl -sSL https://pdm-project.org/install-pdm.py | python -
 	echo 'export PATH="$HOME/.local/bin${PATH:+:${PATH}}"' >> ~/.zshrc
 fi
 
-if [ -f $(which zoxide) ]; then 
+if [ -f $(which zoxide) ]; then
 	echo "zoxide installed"
 else
 	curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
@@ -65,14 +66,14 @@ else
 	echo "zoxide installed"
 fi
 
-if [ -f $(which exa	) ]; then 
+if [ -f $(which exa	) ]; then
 	echo "exa already installed"
 else
 	sudo apt install exa
 	echo "alias lsd='exa -h --icons --long --sort=mod'" >> ~/.zshrc
 fi
 
-if [ -f $(which fontconfig) ]; then 
+if [ -f $(which fontconfig) ]; then
 	echo "fontconfig installed"
 else
 	sudo apt install unzip
@@ -85,7 +86,7 @@ else
 	echo "fontconfig installed"
 fi
 
-if [ -f $(which starship) ]; then 
+if [ -f $(which starship) ]; then
 	echo "starship installed"
 else
 	curl -ss https://starship.rs/install.sh | sh
@@ -96,7 +97,7 @@ else
 	echo "starship installed"
 fi
 
-if [ -f $(which nvim) ]; then 
+if [ -f $(which nvim) ]; then
 	echo "neovim installed"
 else
 	sudo apt install snapd
@@ -104,9 +105,6 @@ else
 
 	echo "neovim installed"
 fi
-
-
-
 
 
 COUNTER=0
@@ -122,10 +120,10 @@ fi
 if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
 	let COUNTER++
 fi
-if [[ $(pyenv versions) == *"3.9.12"* ]]; then
+if [[ $(pyenv versions) == *"3.9.13"* ]]; then
 	let COUNTER++
 fi
-if [ -f $(which poetry) ]; then 
+if [ -f $(which pdm) ]; then
 	let COUNTER++
 fi
 echo "Installed ${COUNTER}/6 items succesfully"
