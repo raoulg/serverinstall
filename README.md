@@ -28,3 +28,7 @@ Removing oh-my-zsh causes problems because the script does not has acces to the
 because of the shell reboot.
 
 If someone has a nice fix for that, let me know :)
+
+```sh
+curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/main/serversetup.sh | bash
+```
