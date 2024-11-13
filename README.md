@@ -30,5 +30,5 @@ because of the shell reboot.
 If someone has a nice fix for that, let me know :)
 
 ```sh
-curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/main/serversetup.sh | bash
+curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/refs/heads/master/serversetup.sh | bash
 ```
