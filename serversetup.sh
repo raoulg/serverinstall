@@ -1,45 +1,59 @@
 #!/bin/bash
-
-# Exit on error
 set -e
 
+# Get user input FIRST, before any sudo commands
 echo "Starting server setup..."
-
-# Get email and infer name
 read -p "Enter your email address: " email
-# Extract name from email (assumes format: firstname.lastname@domain.com or firstname@domain.com)
 name=$(echo "$email" | cut -d'@' -f1 | tr '.' ' ' | sed 's/\b\(.\)/\u\1/g')
-
 echo "Setting up git configuration with:"
 echo "Name: $name"
 echo "Email: $email"
 read -p "Is this correct? [Y/n] " confirm
-confirm=${confirm:-Y}  # Default to Y if user just hits enter
-
+confirm=${confirm:-Y}
 if [[ ! $confirm =~ ^[Yy]$ ]]; then
     read -p "Enter your preferred name: " name
 fi
 
-# Function to check if command exists
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+# Store the values
+export setup_name="${name}"
+export setup_email="${email}"
 
 # Install basic dependencies
 echo "Installing basic dependencies..."
 sudo apt update
-sudo apt install -y curl wget gpg ripgrep fzy
+sudo apt install -y curl wget gpg ripgrep fzy unzip fontconfig zsh
 
 # Install eza
 echo "Installing eza..."
-if ! command_exists eza; then
-    sudo mkdir -p /etc/apt/keyrings
-    wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
-    echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
-    sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
-    sudo apt update
-    sudo apt install -y eza
-fi
+sudo mkdir -p /etc/apt/keyrings
+wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+sudo apt update
+sudo apt install -y eza
+
+# Install oh-my-zsh and plugins (with redirected output)
+echo "Installing oh-my-zsh and plugins..."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# Install zoxide
+echo "Installing zoxide..."
+curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+
+# Install Nerd Fonts
+echo "Installing Nerd Fonts..."
+mkdir -p ~/.fonts
+cd ~/.fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/FiraCode.zip
+unzip FiraCode.zip
+fc-cache -f -v
+
+# Install starship
+echo "Installing starship..."
+curl -sS https://starship.rs/install.sh | sh
+mkdir -p ~/.config
+starship preset nerd-font-symbols > ~/.config/starship.toml
 
 # Install Neovim config
 echo "Installing Neovim configuration..."
@@ -47,18 +61,26 @@ curl -sSL https://raw.githubusercontent.com/raoulg/neovim/main/install-nvim.sh |
 
 # Install Rye
 echo "Installing Rye..."
-if ! command_exists rye; then
-    curl -sSf https://rye.astral.sh/get | bash
-fi
+curl -sSf https://rye.astral.sh/get | bash
 
-# Configure Git
+# Configure Git using stored values
 echo "Configuring Git..."
-git config --global user.name "$name"
-git config --global user.email "$email"
+git config --global user.name "${setup_name}"
+git config --global user.email "${setup_email}"
 
-# Add aliases to .bashrc
-echo "Adding aliases to .bashrc..."
-cat >> ~/.bashrc << 'EOL'
+# Configure zsh (append to existing .zshrc)
+echo "Configuring zsh..."
+cat >> ~/.zshrc << 'EOL'
+
+# Custom configuration added by setup script
+# oh-my-zsh configuration
+export ZSH="$HOME/.oh-my-zsh"
+plugins=(git zsh-autosuggestions)
+source $ZSH/oh-my-zsh.sh
+
+# Evaluations
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
 
 # Custom aliases
 alias gs="git status"
@@ -69,7 +91,6 @@ alias lsd="eza --icons -l --sort=mod --hyperlink"
 alias ss="source .venv/bin/activate"
 alias hh="history | tail -n 20"
 alias cdi='cd $(ls | fzy)'
-
 # Navigate to directory of file with extension
 alias lsi='function _rgfzy() { \
     local ext="$1"; \
@@ -80,7 +101,8 @@ alias lsi='function _rgfzy() { \
 }; _rgfzy'
 EOL
 
-# Source .bashrc to make aliases available immediately
-source ~/.bashrc
+# Set zsh as default shell
+echo "Setting zsh as default shell..."
+chsh -s $(which zsh)
 
-echo "Setup complete! Please restart your shell or run 'source ~/.bashrc' to use the new aliases."
+echo "Setup complete! Please log out and back in to use your new zsh configuration."
