@@ -99,10 +99,20 @@ alias lsi='function _rgfzy() { \
         cd "$(dirname "$file")"; \
     fi; \
 }; _rgfzy'
+
+# Terminal configuration
+TERM=xterm-256color
+bindkey "^[[3~" delete-char
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^?' backward-delete-char
 EOL
 
-# Set zsh as default shell
+# Add zsh to allowed shells and set as default
 echo "Setting zsh as default shell..."
-sudo chsh -s $(which zsh)
+command -v zsh | sudo tee -a /etc/shells
+sudo chsh -s $(which zsh) $USER
 
 echo "Setup complete! Please log out and back in to use your new zsh configuration."
