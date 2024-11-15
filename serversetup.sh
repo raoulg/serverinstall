@@ -103,6 +103,6 @@ EOL
 
 # Set zsh as default shell
 echo "Setting zsh as default shell..."
-chsh -s $(which zsh)
+sudo chsh -s $(which zsh)
 
 echo "Setup complete! Please log out and back in to use your new zsh configuration."
