@@ -3,8 +3,8 @@ set -e
 
 # Get user input FIRST, before any sudo commands
 echo "Starting server setup..."
-read -p "Enter your email address: " email
-name=$(echo "$email" | cut -d'@' -f1 | tr '.' ' ' | sed 's/\b\(.\)/\u\1/g')
+name = "Raoul Grouls"
+email = "Raoul.Grouls@han.nl"
 echo "Setting up git configuration with:"
 echo "Name: $name"
 echo "Email: $email"
