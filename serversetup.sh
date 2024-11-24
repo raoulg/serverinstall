@@ -3,20 +3,10 @@ set -e
 
 # Get user input FIRST, before any sudo commands
 echo "Starting server setup..."
-name = "Raoul Grouls"
-email = "Raoul.Grouls@han.nl"
-echo "Setting up git configuration with:"
-echo "Name: $name"
-echo "Email: $email"
-read -p "Is this correct? [Y/n] " confirm
-confirm=${confirm:-Y}
-if [[ ! $confirm =~ ^[Yy]$ ]]; then
-    read -p "Enter your preferred name: " name
-fi
 
 # Store the values
-export setup_name="${name}"
-export setup_email="${email}"
+export setup_name="Raoul Grouls"
+export setup_email="Raoul.Grouls@han.nl"
 
 # Install basic dependencies
 echo "Installing basic dependencies..."
