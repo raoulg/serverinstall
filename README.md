@@ -19,7 +19,7 @@ It will install:
 # Docker
 for setting up docker
 ```sh
-curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/refs/heads/master/install-docker.sh | sudo bash
+curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/refs/heads/master/install-docker.sh | bash
 ```
 
 # Personal
