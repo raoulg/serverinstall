@@ -45,7 +45,11 @@ echo "Installing Rye..."
 curl -sSf https://rye.astral.sh/get | bash
 
 
-# Configure zsh (append to existing .zshrc)
+cat >> ~/.zprofile << 'EOL'
+# Source Rye environment
+source "$HOME/.rye/env"
+EOL
+
 echo "Configuring zsh..."
 cat >> ~/.zshrc << 'EOL'
 
@@ -85,6 +89,9 @@ bindkey '^[[F' end-of-line
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 bindkey '^?' backward-delete-char
+
+export PATH="$HOME/.local/bin:$HOME/.rye/shims:$PATH"
+source "$HOME/.rye/env"
 EOL
 
 # Add zsh to allowed shells and set as default
