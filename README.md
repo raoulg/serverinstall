@@ -16,6 +16,12 @@ It will install:
 - rye https://rye.astral.sh 
 - add some useful aliases to the `~/.zshrc` file
 
+# Docker
+for setting up docker
+```sh
+curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/refs/heads/master/install-docker.sh | bash
+```
+
 # Personal
 This is my personalized setup; it will also set my github username and install my [neovim config](https://github.com/raoulg/neovim).
 ```sh
