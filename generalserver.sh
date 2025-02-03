@@ -40,15 +40,10 @@ mkdir -p ~/.config
 starship preset nerd-font-symbols > ~/.config/starship.toml
 
 
-# Install Rye
-echo "Installing Rye..."
-curl -sSf https://rye.astral.sh/get | bash
-
-
-cat >> ~/.zprofile << 'EOL'
-# Source Rye environment
-source "$HOME/.rye/env"
-EOL
+# Install uv
+echo "Installing uv..."
+curl -LsSf https://astral.sh/uv/install.sh | sh
+echo 'eval "$(uv generate-shell-completion zsh)"' >> ~/.zshrc
 
 echo "Configuring zsh..."
 cat >> ~/.zshrc << 'EOL'
@@ -90,8 +85,7 @@ bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 bindkey '^?' backward-delete-char
 
-export PATH="$HOME/.local/bin:$HOME/.rye/shims:$PATH"
-source "$HOME/.rye/env"
+export PATH="$HOME/.local/bin:$PATH"
 EOL
 
 # Add zsh to allowed shells and set as default
