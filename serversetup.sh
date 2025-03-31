@@ -45,6 +45,12 @@ curl -sS https://starship.rs/install.sh | sh
 mkdir -p ~/.config
 starship preset nerd-font-symbols > ~/.config/starship.toml
 
+
+# install nvim 0.10
+curl -LO https://github.com/neovim/neovim/releases/download/v0.10.0/nvim.appimage
+chmod u+x nvim.appimage
+
+
 # Install Neovim config
 echo "Installing Neovim configuration..."
 curl -sSL https://raw.githubusercontent.com/raoulg/neovim/main/install-nvim.sh | bash
