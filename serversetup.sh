@@ -50,8 +50,8 @@ echo "Installing Neovim configuration..."
 curl -sSL https://raw.githubusercontent.com/raoulg/neovim/main/install-nvim.sh | bash
 
 # Install Rye
-echo "Installing Rye..."
-curl -sSf https://rye.astral.sh/get | bash
+echo "Installing uv..."
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Configure Git using stored values
 echo "Configuring Git..."
