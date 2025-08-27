@@ -13,7 +13,7 @@ It will install:
 - oh-my-zsh https://ohmyz.sh
 - zoxide https://github.com/ajeetdsouza/zoxide
 - starship plus nerdfonts https://starship.rs
-- rye https://rye.astral.sh 
+- uv https://docs.astral.sh/uv/
 - add some useful aliases to the `~/.zshrc` file
 
 # Docker
