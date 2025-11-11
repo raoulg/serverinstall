@@ -27,3 +27,11 @@ This is my personalized setup; it will also set my github username and install m
 ```sh
 curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/refs/heads/master/serversetup.sh | bash
 ```
+
+# Groups
+To create a `srv/shared` folder with group ownership, run
+```sh
+curl -sSL https://raw.githubusercontent.com/raoulg/serverinstall/refs/heads/master/groups.sh | bash
+```
+
+and add new users with `sudo usermod -aG collaborators another_user`
